@@ -1,10 +1,6 @@
 {
     "rewrites": [
       { "source": "/(.*)", "destination": "/index.html" }
-    ],
-    "error": {
-      "statusCode": 404,
-      "page": "./src/pages/Error.jsx"
-    }
-  }
+    ]
+}
   
