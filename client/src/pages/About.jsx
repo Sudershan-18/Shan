@@ -9,9 +9,15 @@ export const About = () => {
     //but if we want we can do this in the same way we did in the contact.jsx
     //i.e. using useState, to set the value of username only once with the help of another variable
 
+    // useEffect(() => {
+    //     useAuthentication();
+    // }, [user]);
+
     useEffect(() => {
-        useAuthentication();
-    }, [user]);
+        if (isLoggedIn) {
+            useAuthentication();
+        }
+    }, [isLoggedIn]);
 
     return(
         <>

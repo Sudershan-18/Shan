@@ -5,9 +5,17 @@ import { useEffect } from "react";
 
 export const Home = () => {
     const { user, useAuthentication, isLoggedIn } = useAuth();
+
+    // useEffect(() => {
+    //         useAuthentication();
+    // }, [user]);
+
     useEffect(() => {
-        useAuthentication();
-    }, [user]);
+        if (isLoggedIn) {
+            useAuthentication();
+        }
+    }, [isLoggedIn]);
+    
 
     return(
         <>
