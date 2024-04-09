@@ -39,27 +39,29 @@ export const AuthProvider = ({ children }) => {
     };
 
     const useAuthentication = async () => {
-        try {
-            setIsLoading(true);
-            const response = await fetch(`${BACKEND_URL}/api/auth/user`, {
-                method: "GET",
-                headers: {
-                    Authorization: authorizationToken,
-                },
-            });
-
-            if(response.ok){
-                const data = await response.json();
-                console.log("user's data", data.userData);
-                setUser(data.userData);
-                setIsLoading(false); //once we get the data, set isLoading to false, cuz we have the data now and we can decide to show the content or not
-            }
-            else {
+        if(isLoggedIn){
+            try {
+                setIsLoading(true);
+                const response = await fetch(`${BACKEND_URL}/api/auth/user`, {
+                    method: "GET",
+                    headers: {
+                        Authorization: authorizationToken,
+                    },
+                });
+    
+                if(response.ok){
+                    const data = await response.json();
+                    console.log("user's data", data.userData);
+                    setUser(data.userData);
+                    setIsLoading(false); //once we get the data, set isLoading to false, cuz we have the data now and we can decide to show the content or not
+                }
+                else {
+                    console.error("Error fetching user's data!");
+                    setIsLoading(false); //since we are getting any kind of response, loading is finished, so set the isLoading variable to false
+                }
+            } catch (error) {
                 console.error("Error fetching user's data!");
-                setIsLoading(false); //since we are getting any kind of response, loading is finished, so set the isLoading variable to false
             }
-        } catch (error) {
-            console.error("Error fetching user's data!");
         }
     };
 
